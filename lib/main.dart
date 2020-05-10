@@ -30,24 +30,47 @@ class _TaskListState extends State<TaskList> {
             title: Text(_toDoItems[index].getTask()),
             subtitle: Text(_toDoItems[index].getDate()),
             trailing: SizedBox(
-                width:40, 
+                width: 40,
                 height: 40,
                 child: FloatingActionButton(
-                  child: Icon(Icons.check_box),
-                  onPressed: () => _promptRemoveAlert(index)
-            )),
+                    child: Icon(Icons.check_box),
+                    onPressed: () => _promptRemoveAlert(index))),
             onTap: () => _promptRemoveAlert(index));
       }
     });
   }
 
   void _promptRemoveAlert(int index) {
-    
+    showDialog(context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Mark task "${_toDoItems[index].getTask()}" as done?'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Cancel"),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                _removeToDoItem(index);
+                Navigator.of(context).pop();
+              },
+            )
+          ]
+        );
+      });
   }
 
   void _addToDoItem(String task, String date) {
     setState(() {
       _toDoItems.add(new Task(task, date));
+    });
+  }
+
+  void _removeToDoItem(int index) {
+    setState(() {
+      _toDoItems.removeAt(index);
     });
   }
 
