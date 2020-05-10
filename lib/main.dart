@@ -27,11 +27,22 @@ class _TaskListState extends State<TaskList> {
     return ListView.builder(itemBuilder: (context, index) {
       if (index < _toDoItems.length) {
         return ListTile(
-          title: Text(_toDoItems[index].getTask()),
-          subtitle: Text(_toDoItems[index].getDate()),
-        );
+            title: Text(_toDoItems[index].getTask()),
+            subtitle: Text(_toDoItems[index].getDate()),
+            trailing: SizedBox(
+                width:40, 
+                height: 40,
+                child: FloatingActionButton(
+                  child: Icon(Icons.check_box),
+                  onPressed: () => _promptRemoveAlert(index)
+            )),
+            onTap: () => _promptRemoveAlert(index));
       }
     });
+  }
+
+  void _promptRemoveAlert(int index) {
+    
   }
 
   void _addToDoItem(String task, String date) {
@@ -47,58 +58,59 @@ class _TaskListState extends State<TaskList> {
       return Scaffold(
           appBar: AppBar(title: Text("Add New Task")),
           body: DecoratedBox(
-          position: DecorationPosition.background,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('images/gradient.jpg'), fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        width: 270,
-                        child: TextField(
-                          autofocus: true,
-                          controller: taskController,
-                          decoration: InputDecoration(
-                              hintText: "Task",
-                              contentPadding: const EdgeInsets.all(16.0)),
-                        ))
-                  ]),
-              SizedBox(height: 15),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        width: 270,
-                        child: TextField(
-                          autofocus: true,
-                          controller: dateController,
-                          decoration: InputDecoration(
-                              hintText: "Completion Date",
-                              contentPadding: const EdgeInsets.all(16.0)),
-                        ))
-                  ]),
-              SizedBox(height: 15),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                        child: RaisedButton(
-                            onPressed: () {
-                              _addToDoItem(
-                                  taskController.text, dateController.text);
-                              taskController.dispose();
-                              dateController.dispose();
-                              Navigator.pop(context);
-                            },
-                            child: Text("ADD TASK")))
-                  ]),
-            ],
-          )));
+              position: DecorationPosition.background,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('images/gradient.jpg'),
+                    fit: BoxFit.cover),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: 270,
+                            child: TextField(
+                              autofocus: true,
+                              controller: taskController,
+                              decoration: InputDecoration(
+                                  hintText: "Task",
+                                  contentPadding: const EdgeInsets.all(16.0)),
+                            ))
+                      ]),
+                  SizedBox(height: 15),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            width: 270,
+                            child: TextField(
+                              autofocus: true,
+                              controller: dateController,
+                              decoration: InputDecoration(
+                                  hintText: "Completion Date",
+                                  contentPadding: const EdgeInsets.all(16.0)),
+                            ))
+                      ]),
+                  SizedBox(height: 15),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                            child: RaisedButton(
+                                onPressed: () {
+                                  _addToDoItem(
+                                      taskController.text, dateController.text);
+                                  taskController.dispose();
+                                  dateController.dispose();
+                                  Navigator.pop(context);
+                                },
+                                child: Text("ADD TASK")))
+                      ]),
+                ],
+              )));
     }));
   }
 
