@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './question.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,12 +36,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Mehul's First Application"),
+          title: Text("My Tasks"),
           backgroundColor: Color(0xFFFF0000),
         ),
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Question(questions[_questionIndex]),
+            Text(questions[_questionIndex], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             RaisedButton(
               child: Text('Blue'),
               color: Color(0xFF0000FF),
