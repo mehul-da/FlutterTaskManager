@@ -1,66 +1,42 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(TaskListStart());
 }
 
-class MyApp extends StatefulWidget {
+class TaskListStart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(title: "Task Manager", home: TaskList());
+  }
+}
+
+class TaskList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return _MyAppState();
+    return _TaskListState();
   }
 }
 
-class _MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
+class _TaskListState extends State<TaskList> {
+  List<String> toDoItems = [];
 
-  void _answerQuestion() {
-    setState(() {
-      _questionIndex = _questionIndex + 1;
-    });
-    if (_questionIndex == 2) {
-      setState(() {
-        _questionIndex = 0;
-      });
-    }
+  Widget _buildToDoList() {
+    return Text("HELLO");
   }
 
-  // This widget is the root of your application.
+  Widget _addToDoItem() {
+    return Text("BRUH");
+  }
+
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      "What is your favorite color?",
-      "What is your best friend's favorite color?"
-    ];
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("My Tasks"),
-          backgroundColor: Color(0xFFFF0000),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(questions[_questionIndex], style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            RaisedButton(
-              child: Text('Blue'),
-              color: Color(0xFF0000FF),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text('Red'),
-              color: Color(0xFFFF0000),
-              onPressed: _answerQuestion,
-            ),
-            RaisedButton(
-              child: Text('Green'),
-              color: Color(0xFF008000),
-              onPressed: _answerQuestion,
-            ),
-          ],
-        ),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text("Tasks")),
+      body: _buildToDoList(),
+      floatingActionButton: FloatingActionButton(onPressed: _addToDoItem, tooltip: "Add task", child: Icon(Icons.add),),
     );
   }
 }
