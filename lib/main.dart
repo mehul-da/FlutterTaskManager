@@ -46,7 +46,13 @@ class _TaskListState extends State<TaskList> {
       var dateController = TextEditingController();
       return Scaffold(
           appBar: AppBar(title: Text("Add New Task")),
-          body: Column(
+          body: DecoratedBox(
+          position: DecorationPosition.background,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/gradient.jpg'), fit: BoxFit.cover),
+          ),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
@@ -92,7 +98,7 @@ class _TaskListState extends State<TaskList> {
                             child: Text("ADD TASK")))
                   ]),
             ],
-          ));
+          )));
     }));
   }
 
@@ -100,10 +106,16 @@ class _TaskListState extends State<TaskList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Mehul\'s Tasks")),
-      body: Center(
-          child: _toDoItems.length == 0
-              ? Text("There are no items to display")
-              : _buildToDoList()),
+      body: DecoratedBox(
+          position: DecorationPosition.background,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('images/gradient.jpg'), fit: BoxFit.cover),
+          ),
+          child: Center(
+              child: _toDoItems.length == 0
+                  ? Text("There are no items to display")
+                  : _buildToDoList())),
       floatingActionButton: FloatingActionButton(
         onPressed: _pushNewAddingScreen,
         tooltip: "Add task",
