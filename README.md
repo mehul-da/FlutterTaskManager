@@ -1,6 +1,4 @@
-# flutterapp
-
-A new Flutter application.
+Hey! This is a task manager application created with Flutter, just as a small introduction project to the framework.
 
 ## Getting Started
 
