@@ -21,14 +21,20 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  List<String> toDoItems = [];
+  List<String> _toDoItems = [];
 
   Widget _buildToDoList() {
-    return Text("HELLO");
+    return ListView.builder(itemBuilder: (context, index) {
+      if (index < _toDoItems.length) {
+        return ListTile(title: Text(_toDoItems[index]));
+      }
+    });
   }
 
-  Widget _addToDoItem() {
-    return Text("BRUH");
+  void _addToDoItem() {
+    setState(() {
+      _toDoItems.add("HELLO");
+    });
   }
 
   @override
@@ -36,7 +42,11 @@ class _TaskListState extends State<TaskList> {
     return Scaffold(
       appBar: AppBar(title: Text("Tasks")),
       body: _buildToDoList(),
-      floatingActionButton: FloatingActionButton(onPressed: _addToDoItem, tooltip: "Add task", child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addToDoItem,
+        tooltip: "Add task",
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
