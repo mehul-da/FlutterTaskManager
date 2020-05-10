@@ -21,32 +21,112 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  List<String> _toDoItems = [];
+  List<Task> _toDoItems = [];
 
   Widget _buildToDoList() {
     return ListView.builder(itemBuilder: (context, index) {
       if (index < _toDoItems.length) {
-        return ListTile(title: Text(_toDoItems[index]));
+        return ListTile(
+          title: Text(_toDoItems[index].getTask()),
+          subtitle: Text(_toDoItems[index].getDate()),
+        );
       }
     });
   }
 
-  void _addToDoItem() {
+  void _addToDoItem(String task, String date) {
     setState(() {
-      _toDoItems.add("HELLO");
+      _toDoItems.add(new Task(task, date));
     });
+  }
+
+  void _pushNewAddingScreen() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      var taskController = TextEditingController();
+      var dateController = TextEditingController();
+      return Scaffold(
+          appBar: AppBar(title: Text("Add New Task")),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        width: 270,
+                        child: TextField(
+                          autofocus: true,
+                          controller: taskController,
+                          decoration: InputDecoration(
+                              hintText: "Task",
+                              contentPadding: const EdgeInsets.all(16.0)),
+                        ))
+                  ]),
+              SizedBox(height: 15),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        width: 270,
+                        child: TextField(
+                          autofocus: true,
+                          controller: dateController,
+                          decoration: InputDecoration(
+                              hintText: "Completion Date",
+                              contentPadding: const EdgeInsets.all(16.0)),
+                        ))
+                  ]),
+              SizedBox(height: 15),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        child: RaisedButton(
+                            onPressed: () {
+                              _addToDoItem(
+                                  taskController.text, dateController.text);
+                              taskController.dispose();
+                              dateController.dispose();
+                              Navigator.pop(context);
+                            },
+                            child: Text("ADD TASK")))
+                  ]),
+            ],
+          ));
+    }));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tasks")),
-      body: _buildToDoList(),
+      appBar: AppBar(title: Text("Mehul\'s Tasks")),
+      body: Center(
+          child: _toDoItems.length == 0
+              ? Text("There are no items to display")
+              : _buildToDoList()),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addToDoItem,
+        onPressed: _pushNewAddingScreen,
         tooltip: "Add task",
         child: Icon(Icons.add),
       ),
     );
+  }
+}
+
+class Task {
+  String task;
+  String date;
+
+  Task(task, date) {
+    this.task = task;
+    this.date = date;
+  }
+
+  String getTask() {
+    return this.task;
+  }
+
+  String getDate() {
+    return this.date;
   }
 }
