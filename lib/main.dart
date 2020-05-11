@@ -123,6 +123,7 @@ class _TaskListState extends State<TaskList> {
                       children: <Widget>[
                         Container(
                             child: RaisedButton(
+                                color: Colors.blue,
                                 onPressed: () {
                                   _addToDoItem(
                                       taskController.text, dateController.text);
@@ -130,7 +131,7 @@ class _TaskListState extends State<TaskList> {
                                   dateController.dispose();
                                   Navigator.pop(context);
                                 },
-                                child: Text("ADD TASK")))
+                                child: Text("ADD TASK", style: TextStyle(color: Colors.white),)))
                       ]),
                 ],
               )));
@@ -140,7 +141,7 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Mehul\'s Tasks")),
+      appBar: AppBar(title: Text("Mehul\'s Tasks"),),
       body: DecoratedBox(
           position: DecorationPosition.background,
           decoration: BoxDecoration(
@@ -149,7 +150,7 @@ class _TaskListState extends State<TaskList> {
           ),
           child: Center(
               child: _toDoItems.length == 0
-                  ? Text("There are no items to display")
+                  ? Text("There are no items to display.")
                   : _buildToDoList())),
       floatingActionButton: FloatingActionButton(
         onPressed: _pushNewAddingScreen,
