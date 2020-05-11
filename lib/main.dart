@@ -84,7 +84,7 @@ class _TaskListState extends State<TaskList> {
               position: DecorationPosition.background,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('images/gradient.jpg'),
+                    image: AssetImage('images/gradient.png'),
                     fit: BoxFit.cover),
               ),
               child: Column(
@@ -145,7 +145,7 @@ class _TaskListState extends State<TaskList> {
           position: DecorationPosition.background,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/gradient.jpg'), fit: BoxFit.cover),
+                image: AssetImage('images/gradient.png'), fit: BoxFit.cover),
           ),
           child: Center(
               child: _toDoItems.length == 0
